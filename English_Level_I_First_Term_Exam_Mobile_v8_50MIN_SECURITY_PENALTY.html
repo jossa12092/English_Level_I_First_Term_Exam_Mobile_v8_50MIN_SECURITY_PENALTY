@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="theme-color" content="#0b1220" />
+<title>English Level I • First-Term Exam</title>
+<style>
+:root{
+  --bg:#07111f;--panel:#0d1b2d;--panel2:#11243a;--card:#ffffff;--ink:#0d1b2a;--muted:#65768a;
+  --line:#dfe7ef;--accent:#5b7cfa;--accent2:#00b8d9;--good:#159a62;--warn:#d98513;--bad:#c84242;
+  --shadow:0 22px 55px rgba(0,0,0,.22);--r:24px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top right,#173657 0,#0a1626 36%,#07111f 70%);color:white}
+body{min-height:100vh;min-height:100dvh}
+button,input{font:inherit}
+button{touch-action:manipulation}
+.hidden{display:none!important}
+.app{width:min(100%,760px);margin:0 auto;min-height:100vh;min-height:100dvh;padding:16px 14px calc(24px + env(safe-area-inset-bottom))}
+.brand{display:flex;align-items:center;justify-content:space-between;padding:8px 2px 18px}
+.brandmark{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em}
+.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;box-shadow:0 8px 24px #5b7cfa44;font-size:20px}
+.brand small{display:block;color:#9fb3c8;font-weight:600;font-size:11px;margin-top:2px;letter-spacing:.08em;text-transform:uppercase}
+.statusdot{font-size:12px;color:#a9bdd1;background:#ffffff10;border:1px solid #ffffff1b;padding:8px 10px;border-radius:999px}
+.shell{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:30px;padding:8px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+.card{background:var(--card);color:var(--ink);border-radius:23px;overflow:hidden}
+.hero{padding:28px 24px 20px;background:linear-gradient(155deg,#f8fbff 0,#eef4ff 62%,#ecfbff 100%);border-bottom:1px solid #dfe8f4}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#4161d9;background:#e8edff;border:1px solid #d6ddff;padding:8px 10px;border-radius:999px}
+h1{font-size:clamp(29px,8vw,44px);line-height:1.02;margin:18px 0 11px;letter-spacing:-.045em}
+.lead{margin:0;color:#5d6e82;font-size:15.5px;line-height:1.55}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:21px}
+.stat{background:white;border:1px solid #dfe7f0;border-radius:17px;padding:13px 10px;text-align:center;box-shadow:0 7px 18px #2342a90a}
+.stat b{display:block;font-size:19px;color:#172d46}.stat span{font-size:11px;color:#75869a;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.body{padding:22px}
+.label{display:block;font-weight:850;font-size:13px;margin:0 0 8px;color:#34485e}
+.textinput{width:100%;border:1.5px solid #cfdbe7;background:#f9fbfd;border-radius:16px;padding:15px 16px;font-size:17px;outline:none;color:#13253a;transition:.2s}
+.textinput:focus{border-color:#7892f8;box-shadow:0 0 0 4px #5b7cfa18;background:white}
+.notice{display:flex;gap:12px;align-items:flex-start;background:#f4f7fb;border:1px solid #dfe7ef;border-radius:17px;padding:14px;margin-top:16px;color:#52667b;font-size:13px;line-height:1.45}
+.notice .ico{font-size:18px;line-height:1}
+.primary,.secondary,.dangerbtn{width:100%;border:0;border-radius:17px;padding:16px 18px;font-weight:900;font-size:16px;cursor:pointer}
+.primary{margin-top:18px;background:linear-gradient(135deg,#4d6ff3,#04a9cc);color:white;box-shadow:0 14px 28px #466cf13d}
+.secondary{background:#edf3fa;color:#22394f;border:1px solid #dae5ef}
+.dangerbtn{background:#b83232;color:white}
+.primary:disabled{opacity:.45;box-shadow:none}
+.micro{font-size:11.5px;color:#8090a2;text-align:center;margin:12px 0 0;line-height:1.45}
+
+/* Exam */
+.examtop{position:sticky;top:8px;z-index:8;background:rgba(7,17,31,.88);backdrop-filter:blur(12px);border:1px solid #ffffff12;border-radius:19px;padding:10px 12px;margin-bottom:10px;box-shadow:0 12px 30px #0004}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qcount{font-weight:900;font-size:13px}.studentname{color:#a9bfd2;font-size:12px;max-width:42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.timer{display:flex;align-items:center;gap:7px;background:#ffffff10;border:1px solid #ffffff17;border-radius:999px;padding:7px 10px;font-variant-numeric:tabular-nums;font-weight:900;font-size:13px}
+.timer.urgent{background:#5a1717;border-color:#9f3e3e;color:#ffdada}
+.progress{height:7px;border-radius:99px;background:#ffffff13;overflow:hidden;margin-top:9px}.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#5b7cfa,#00b8d9);border-radius:99px;transition:width .25s}
+.questioncard{background:white;color:var(--ink);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+.qhead{padding:22px 20px 14px}.tag{display:inline-flex;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#4661cf;background:#edf1ff;border:1px solid #dae2ff;padding:7px 9px;border-radius:999px}
+.qtitle{font-size:23px;line-height:1.22;letter-spacing:-.025em;margin:14px 0 0;font-weight:900}
+.qsupport{font-size:14px;color:#687b8e;line-height:1.5;margin-top:8px}
+.conversation{margin:4px 20px 18px;background:#f6f9fc;border:1px solid #e1e8ef;border-radius:20px;padding:15px;display:grid;gap:9px}
+.bubble{max-width:90%;padding:11px 13px;border-radius:16px;font-size:15px;line-height:1.4}
+.bubble.a{justify-self:start;background:white;border:1px solid #dce5ee;border-bottom-left-radius:5px}.bubble.b{justify-self:end;background:#e9efff;color:#263e78;border-bottom-right-radius:5px}
+.profile{margin:4px 20px 18px;border:1px solid #dfe8ef;border-radius:20px;padding:16px;background:linear-gradient(135deg,#f7fbff,#f0f5ff)}
+.profiletop{font-size:12px;color:#6e8195;text-transform:uppercase;letter-spacing:.1em;font-weight:900;margin-bottom:10px}.profilegrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.profileitem{background:white;border:1px solid #e0e8ef;border-radius:14px;padding:11px}.profileitem span{display:block;font-size:10px;color:#8292a3;text-transform:uppercase;font-weight:800;letter-spacing:.06em}.profileitem b{display:block;margin-top:4px;font-size:15px}
+.photo{margin:4px 14px 16px;border:1px solid #dce5ed;border-radius:21px;overflow:hidden;background:#edf3f8;min-height:220px;display:grid;place-items:center;position:relative}.photo img{width:100%;height:min(44vh,420px);display:block;object-fit:contain;background:#edf3f8}.photoerror{padding:36px 22px;text-align:center;color:#7e5d5d;font-size:14px;line-height:1.5}
+.sentence{margin:0 20px 16px;background:#f8fafc;border:1px dashed #cdd9e4;border-radius:16px;padding:13px 14px;font-size:17px;font-weight:850;line-height:1.45}
+.options{padding:0 18px 18px;display:grid;gap:10px}.option{width:100%;text-align:left;border:1.5px solid #dce5ed;background:white;color:#1c3045;border-radius:17px;padding:14px 14px;display:flex;gap:11px;align-items:flex-start;font-weight:750;line-height:1.35;font-size:15px;cursor:pointer;transition:.15s}.option:active{transform:scale(.992)}.option.selected{border-color:#5b7cfa;background:#f0f3ff;box-shadow:0 0 0 3px #5b7cfa12}.option.correct{border-color:#36a56f;background:#edf9f3;box-shadow:0 0 0 3px #159a6212}.option.incorrect{border-color:#d76969;background:#fff1f1;box-shadow:0 0 0 3px #c8424210}.option:disabled{cursor:default;opacity:1}.letter{flex:0 0 30px;height:30px;border-radius:10px;background:#eef3f8;display:grid;place-items:center;font-size:12px;font-weight:950;color:#53677b}.option.selected .letter{background:#5b7cfa;color:white}.option.correct .letter{background:#159a62;color:white}.option.incorrect .letter{background:#c84242;color:white}
+.feedbackbox{margin:0 18px 14px;border-radius:17px;padding:14px 15px;display:flex;align-items:flex-start;gap:11px;font-size:14px;line-height:1.4;border:1px solid}.feedbackbox .feedbackicon{font-size:21px;line-height:1}.feedbackbox b{display:block;font-size:16px;margin-bottom:2px}.feedbackbox span{font-size:12px;font-weight:650;opacity:.78}.feedbackbox.correct{background:#edf9f3;border-color:#c9ead9;color:#176b47}.feedbackbox.incorrect{background:#fff1f1;border-color:#f0cece;color:#9a3131}
+.examactions{padding:0 18px 20px}.examactions .primary{margin-top:0}
+
+/* Idioms — compact dropdown matching */
+.matchwrap{padding:0 14px 18px}.matchhint{font-size:12.5px;color:#687b8e;margin:0 6px 12px;line-height:1.45}.idiomlist{display:grid;gap:8px}.idiomrow{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:9px;align-items:center;border:1px solid #dfe7ef;background:#f9fbfd;border-radius:15px;padding:9px 10px}.idiomlabel{font-size:12.5px;line-height:1.25;font-weight:900;color:#24394e;overflow-wrap:anywhere}.meaningselect{width:100%;min-width:0;border:1.5px solid #cfdbe7;background:white;color:#24394e;border-radius:12px;padding:10px 30px 10px 10px;font-size:12.5px;font-weight:750;outline:none;appearance:auto}.meaningselect:focus{border-color:#6f89f6;box-shadow:0 0 0 3px #5b7cfa14}.meaningselect.chosen{border-color:#8ea1ec;background:#f4f6ff}.meaningselect:disabled{opacity:.82;background:#f0f3f6;color:#53677b}.matchfooter{margin-top:10px;font-size:11.5px;color:#7a8a9b;text-align:center}.matchtip{margin:10px 2px 0;padding:10px 11px;border-radius:12px;background:#eef5ff;border:1px solid #dce8fb;color:#50677f;font-size:11.5px;line-height:1.4}
+
+/* Locked and finished */
+.centerpanel{padding:34px 22px;text-align:center}.bigicon{width:72px;height:72px;border-radius:24px;margin:0 auto 18px;display:grid;place-items:center;font-size:34px;background:#f3f6fa;border:1px solid #e1e8ef}.lockicon{background:#fff1f1;color:#a93636;border-color:#f0cccc}.centerpanel h2{font-size:28px;margin:0 0 10px;letter-spacing:-.03em}.centerpanel p{color:#687b8e;line-height:1.55;margin:0 auto;max-width:460px}.unlockbox{margin-top:22px;text-align:left}.resultgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:22px 0}.result{border:1px solid #dfe7ef;border-radius:17px;padding:13px 8px;background:#f8fafc}.result span{display:block;font-size:10px;color:#7c8da0;text-transform:uppercase;font-weight:900;letter-spacing:.05em}.result b{display:block;font-size:21px;margin-top:4px;color:#1a324a}.submitted{background:#edf9f4;border:1px solid #cdebdc;color:#297552;border-radius:16px;padding:13px;font-size:13px;line-height:1.45;margin-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(120px);z-index:50;width:min(calc(100% - 28px),520px);background:#111e2d;color:white;border:1px solid #ffffff1a;border-radius:16px;padding:13px 15px;box-shadow:0 14px 38px #0008;font-size:13px;line-height:1.4;transition:.25s}.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:390px){.app{padding-left:10px;padding-right:10px}.body,.hero{padding-left:18px;padding-right:18px}.qtitle{font-size:21px}.idiomrow{grid-template-columns:minmax(0,.82fr) minmax(0,1.28fr);gap:7px;padding:8px}.idiomlabel,.meaningselect{font-size:11.5px}.meaningselect{padding:9px 24px 9px 8px}.stat{padding-left:5px;padding-right:5px}.stat b{font-size:17px}}
+@media(min-width:680px){.app{padding-top:24px}.hero{padding:34px}.body{padding:28px}.photo{margin-left:20px;margin-right:20px}.options{padding-left:20px;padding-right:20px}.matchwrap{padding-left:20px;padding-right:20px}.idiomlabel,.meaningselect{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="brand">
+    <div class="brandmark"><div class="logo">A1</div><div>English Level I<small>First-Term Exam</small></div></div>
+    <div class="statusdot" id="statusDot">Protected mode</div>
+  </div>
+
+  <div id="startView" class="shell">
+    <section class="card">
+      <div class="hero">
+        <span class="eyebrow">● First-Term Evaluation</span>
+        <h1>English I<br>First-Term Exam</h1>
+        <p class="lead">Introductions, personal information, Verb To Be, There is / There are, prepositions of place, and idioms.</p>
+        <div class="statrow">
+          <div class="stat"><b>25</b><span>Points</span></div>
+          <div class="stat"><b>50 min</b><span>Time</span></div>
+          <div class="stat"><b>A1</b><span>Level</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <label class="label" for="studentName">Student name</label>
+        <input id="studentName" class="textinput" autocomplete="off" maxlength="60" placeholder="Write your full name" />
+        <div class="notice"><div class="ico">🛡️</div><div><b>Protected evaluation.</b><br>Your progress, question order, answers, and remaining time are saved automatically on this device. Do not leave the evaluation screen after you start.</div></div>
+        <button id="startBtn" class="primary">Start Exam</button>
+        <p class="micro"><b>Tap carefully:</b> selecting an option submits that answer immediately and it cannot be changed. The platform will then show <b>Correct</b> or <b>Incorrect</b>. One question is shown at a time.</p>
+      </div>
+    </section>
+  </div>
+
+  <div id="examView" class="hidden">
+    <div class="examtop">
+      <div class="topline"><div><span id="qCount" class="qcount">Question 1 of 25</span><div id="studentTop" class="studentname"></div></div><div id="timer" class="timer">⏱ 50:00</div></div>
+      <div class="progress"><span id="progressBar"></span></div>
+    </div>
+    <section class="questioncard">
+      <div class="qhead"><span id="qTag" class="tag"></span><div id="qTitle" class="qtitle"></div><div id="qSupport" class="qsupport"></div></div>
+      <div id="dynamicArea"></div>
+      <div id="options" class="options"></div>
+      <div id="matchingArea" class="matchwrap hidden"></div>
+      <div id="feedbackBox" class="feedbackbox hidden"><div id="feedbackIcon" class="feedbackicon"></div><div><b id="feedbackTitle"></b><span id="feedbackText"></span></div></div>
+      <div class="examactions"><button id="nextBtn" class="primary" disabled>Continue</button></div>
+    </section>
+  </div>
+
+  <div id="lockedView" class="shell hidden">
+    <section class="card centerpanel">
+      <div class="bigicon lockicon">🔒</div>
+      <h2>Exam locked</h2>
+      <p>A security event was detected. The current question has been counted as incorrect. Please contact your teacher to continue this same attempt.</p>
+      <div class="unlockbox">
+        <label class="label" for="teacherPass">Teacher password</label>
+        <input id="teacherPass" class="textinput" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" />
+        <button id="unlockBtn" class="dangerbtn" style="margin-top:12px">Unlock Exam</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="doneView" class="shell hidden">
+    <section class="card centerpanel">
+      <div class="bigicon">✓</div>
+      <h2>Exam submitted</h2>
+      <p id="doneStudent"></p>
+      <div class="resultgrid">
+        <div class="result"><span>Score</span><b id="doneScore"></b></div>
+        <div class="result"><span>Percentage</span><b id="donePct"></b></div>
+        <div class="result"><span>Grade</span><b id="doneGrade"></b></div>
+      </div>
+      <div class="submitted">Your answers have been saved on this device. Refreshing this page will not start a new attempt.</div>
+    </section>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+(()=>{
+'use strict';
+const STORAGE_KEY='english1_firstterm_exam_v8_50min_security_penalty';
+const DURATION_MS=50*60*1000;
+const TEACHER_CODE='1991';
+const $=id=>document.getElementById(id);
+const P=id=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1200`;
+
+const QUESTIONS=[
+  {id:'intro1',section:'Introductions',type:'mcq',title:'Read the conversation and choose the best answer.',conversation:[['a','Hi! I’m Kevin. What’s your name?'],['b','__________']],options:['My name is Laura.','I’m from Pasto.','I’m 19 years old.','I’m fine, thanks.'],answer:'My name is Laura.'},
+  {id:'intro2',section:'Personal Information',type:'mcq',title:'Choose the answer that matches the question.',conversation:[['a','Where are you from?'],['b','__________']],options:['I’m from Colombia.','I’m 18 years old.','I’m a student.','My name is Daniel.'],answer:'I’m from Colombia.'},
+  {id:'intro3',section:'Personal Information',type:'mcq',title:'Choose the best answer.',conversation:[['a','How old are you?'],['b','__________']],options:['I’m 20 years old.','I’m from Nariño.','I’m a university student.','My last name is López.'],answer:'I’m 20 years old.'},
+  {id:'intro4',section:'Introductions',type:'mcq',title:'Choose the most natural response.',conversation:[['a','Nice to meet you, Sara.'],['b','__________']],options:['Nice to meet you too.','I am from Pasto.','I am nineteen.','See you later.'],answer:'Nice to meet you too.'},
+  {id:'intro5',section:'Personal Information',type:'mcq',title:'Read the profile. Which sentence is correct?',profile:{Name:'Sofía',Age:'19',City:'Pasto',Occupation:'Student'},options:['Sofía is 19 years old and she is a student.','Sofía are 19 years old and she is a student.','Sofía is from Cali and she is a teacher.','He is 19 years old and he is a student.'],answer:'Sofía is 19 years old and she is a student.'},
+  {id:'intro6',section:'Introductions',type:'mcq',title:'Choose the best answer.',conversation:[['a','Are you a student?'],['b','__________']],options:['Yes, I am.','Yes, I is.','Yes, you are.','No, I are not.'],answer:'Yes, I am.'},
+  {id:'intro7',section:'Personal Information',type:'mcq',title:'Choose the answer with the correct personal information.',conversation:[['a','What’s your last name?'],['b','__________']],options:['My last name is Gómez.','I am from Colombia.','I am 18 years old.','I am fine.'],answer:'My last name is Gómez.'},
+
+  {id:'tobe1',section:'Verb To Be',type:'mcq',title:'Choose the correct option.',sentence:'Laura and Andrés are in the same English class. They ___ students.',options:['are','is','am','be'],answer:'are'},
+  {id:'tobe2',section:'Verb To Be',type:'mcq',title:'Choose the correct sentence.',options:['My parents are from Pasto.','My parents is from Pasto.','My parents am from Pasto.','My parents be from Pasto.'],answer:'My parents are from Pasto.'},
+  {id:'tobe3',section:'Verb To Be',type:'mcq',title:'Complete the sentence.',sentence:'Daniel is a student. He ___ a teacher.',options:["isn’t","aren’t","am not","not are"],answer:"isn’t"},
+  {id:'tobe4',section:'Verb To Be',type:'mcq',title:'Complete the conversation.',conversation:[['a','___ you a first-semester student?'],['b','Yes, I am.']],options:['Are','Is','Am','Be'],answer:'Are'},
+  {id:'tobe5',section:'Verb To Be',type:'mcq',title:'Choose the option that completes both blanks.',sentence:'My sister ___ 20 years old, and my brothers ___ 18.',options:['is / are','are / is','am / are','is / is'],answer:'is / are'},
+  {id:'tobe6',section:'Verb To Be',type:'mcq',title:'Read carefully and choose the correct sentence.',options:['We are in English class today.','We is in English class today.','We am in English class today.','We be in English class today.'],answer:'We are in English class today.'},
+  {id:'tobe7',section:'Verb To Be',type:'mcq',title:'Choose the correct response.',conversation:[['a','Is Camila your classmate?'],['b','Yes, ________.']],options:['she is','she are','he is','I am'],answer:'she is'},
+
+  {id:'place1',section:'There is / There are',type:'mcq',title:'Look at the photo. Choose the correct option.',sentence:'There ___ a backpack on the table.',image:P(19948567),options:['is','are','am','be'],answer:'is'},
+  {id:'place2',section:'Prepositions of Place',type:'mcq',title:'Look at the photo. Where is the ball?',sentence:'The ball is ___ the goal.',image:P(35688418),options:['in front of','behind','under','between'],answer:'in front of'},
+  {id:'place3',section:'There is / There are + Prepositions',type:'mcq',title:'Look at the photo. Choose the best option.',sentence:'There ___ many books ___ the shelves.',image:P(14680509),options:['are / on','is / on','are / under','is / behind'],answer:'are / on'},
+  {id:'place4',section:'Prepositions of Place',type:'mcq',title:'Look at the photo. Where are the flowers?',sentence:'The flowers are ___ the vase.',image:P(18480231),options:['in','under','behind','between'],answer:'in'},
+  {id:'place5',section:'There is / There are + Prepositions',type:'mcq',title:'Choose the sentence that matches the photo.',image:P(27624009),options:['There is a refrigerator next to the sink.','There are a refrigerator next to the sink.','There is a refrigerator under the sink.','There are two refrigerators on the sink.'],answer:'There is a refrigerator next to the sink.'},
+  {id:'place6',section:'There is / There are + Prepositions',type:'mcq',title:'Look at the photo. Complete both parts.',sentence:'There ___ a clock ___ the table.',image:P(5726029),options:['is / above','are / above','is / under','are / behind'],answer:'is / above'},
+  {id:'place7',section:'There is / There are + Prepositions',type:'mcq',title:'Choose the sentence that matches the photo.',image:P(20697253),options:['There is a plant behind the sofa.','There are a plant behind the sofa.','There is a plant under the sofa.','There are two plants on the sofa.'],answer:'There is a plant behind the sofa.'},
+  {id:'place8',section:'Prepositions of Place',type:'mcq',title:'Look at the photo. Where are the pillows?',sentence:'The pillows are ___ the bed.',image:P(8112905),options:['on','under','behind','next to'],answer:'on'},
+  {id:'place9',section:'Prepositions of Place',type:'mcq',title:'Look at the photo. Where is the hammock?',sentence:'The hammock is ___ two trees.',image:P(34447965),options:['between','under','behind','on'],answer:'between'},
+  {id:'place10',section:'There is / There are + Prepositions',type:'mcq',title:'Look at the photo. Choose the best option.',sentence:'There ___ a bench ___ two trees.',image:P(189900),options:['is / between','are / between','is / under','are / on'],answer:'is / between'},
+
+  {id:'idioms',section:'Idioms',type:'matching',title:'Choose the correct meaning for each idiom.',support:'For each idiom, open the list and choose one simple meaning. A meaning already selected cannot be used again. Complete all 9 before checking your answer.',pairs:[
+    ['I am on cloud nine.','I am very happy.'],
+    ['I feel blue.','I am sad.'],
+    ['Hit the sack.','Go to sleep.'],
+    ['Piece of cake.','Very easy.'],
+    ['Miss the boat.','Lose a chance.'],
+    ['Speak of the devil.','We talk about a person and the person appears.'],
+    ['Hand to God.','I promise.'],
+    ['No pain, no gain.','Work hard to get results.'],
+    ['The early bird catches the worm.','People who start early can do better.']
+  ]}
+];
+
+const byId=id=>QUESTIONS.find(q=>q.id===id);
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null')}catch{return null}}
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
+function newState(name){
+  const order=shuffle(QUESTIONS.map(q=>q.id));
+  const optionOrders={};
+  QUESTIONS.forEach(q=>{if(q.type==='mcq') optionOrders[q.id]=shuffle(q.options);});
+  const idiom=byId('idioms');
+  return {version:8,status:'active',name,startedAt:Date.now(),current:0,order,optionOrders,answers:{},checked:{},securityPenalties:{},matchingMeanings:shuffle(idiom.pairs.map(p=>p[1])),matching:{},pendingHiddenAt:null,finishedAt:null,score:null};
+}
+let state=loadState();
+if(state){state.checked=state.checked||{};state.securityPenalties=state.securityPenalties||{};}
+let tickHandle=null;
+let hideTimer=null;
+let focusLossTimer=null;
+let unloading=false;
+let selectGraceUntil=0;
+let toastTimer=null;
+
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
+function showOnly(id){['startView','examView','lockedView','doneView'].forEach(x=>$(x).classList.toggle('hidden',x!==id));}
+function navType(){const n=performance.getEntriesByType?.('navigation')?.[0];return n?.type||'';}
+function remaining(){return Math.max(0,DURATION_MS-(Date.now()-state.startedAt));}
+function formatTime(ms){const s=Math.ceil(ms/1000),m=Math.floor(s/60),r=s%60;return `${String(m).padStart(2,'0')}:${String(r).padStart(2,'0')}`;}
+
+function boot(){
+  if(state && state.pendingHiddenAt && navType()==='reload'){
+    state.pendingHiddenAt=null; saveState();
+  }
+  if(!state){showOnly('startView');return;}
+  if(state.status==='finished'){showDone();return;}
+  if(state.status==='locked'){showLocked();return;}
+  if(state.status==='active'){
+    if(remaining()<=0){finishExam('time');return;}
+    if(state.pendingHiddenAt){lockExam('background');return;}
+    showExam();
+  }
+}
+
+function startExam(){
+  const name=$('studentName').value.trim();
+  if(name.length<3){showToast('Please write your full name.');$('studentName').focus();return;}
+  state=newState(name);saveState();showExam();
+}
+
+function showExam(){
+  showOnly('examView');$('studentTop').textContent=state.name;$('statusDot').textContent='Exam active';
+  renderQuestion();startTimer();
+}
+function startTimer(){clearInterval(tickHandle);updateTimer();tickHandle=setInterval(updateTimer,500);}
+function updateTimer(){
+  if(!state||state.status!=='active'){clearInterval(tickHandle);return;}
+  const ms=remaining();$('timer').textContent='⏱ '+formatTime(ms);$('timer').classList.toggle('urgent',ms<=5*60*1000);
+  if(ms<=0)finishExam('time');
+}
+
+function questionCorrect(q){
+  if(state.securityPenalties&&state.securityPenalties[q.id]) return false;
+  if(q.type==='mcq') return state.answers[q.id]===q.answer;
+  let correct=0;q.pairs.forEach(([idiom,meaning])=>{if(state.matching[idiom]===meaning)correct++});
+  return correct>=Math.ceil(q.pairs.length*2/3);
+}
+function showAnswerFeedback(q){
+  const fb=$('feedbackBox');
+  if(!state.checked[q.id]){fb.className='feedbackbox hidden';return;}
+  const ok=questionCorrect(q);
+  fb.className='feedbackbox '+(ok?'correct':'incorrect');
+  $('feedbackIcon').textContent=ok?'✓':'✕';
+  $('feedbackTitle').textContent=ok?'Correct!':'Incorrect.';
+  if(state.securityPenalties&&state.securityPenalties[q.id]){
+    $('feedbackText').textContent='This question was counted as incorrect after a security lock. Continue to the next question.';
+  }else if(q.type==='matching'){
+    let correct=0;q.pairs.forEach(([idiom,meaning])=>{if(state.matching[idiom]===meaning)correct++});
+    $('feedbackText').textContent=`${correct} of ${q.pairs.length} pairs are correct. Your matching answer is locked.`;
+  }else{
+    $('feedbackText').textContent='Your answer is locked. Continue to the next question.';
+  }
+}
+
+function renderQuestion(){
+  const q=byId(state.order[state.current]);
+  const n=state.current+1;
+  $('qCount').textContent=`Question ${n} of 25`;
+  $('progressBar').style.width=`${((n-1)/25)*100}%`;
+  $('qTag').textContent=q.section;
+  $('qTitle').textContent=q.title;
+  $('qSupport').textContent=q.support||'';
+  $('dynamicArea').innerHTML='';
+  $('options').innerHTML='';
+  $('matchingArea').innerHTML='';
+  $('matchingArea').classList.add('hidden');
+  $('options').classList.remove('hidden');
+  $('feedbackBox').className='feedbackbox hidden';
+  $('nextBtn').textContent='Continue';
+  $('nextBtn').disabled=true;
+
+  if(q.conversation){
+    const box=document.createElement('div');box.className='conversation';
+    q.conversation.forEach(([who,text])=>{const d=document.createElement('div');d.className='bubble '+who;d.textContent=text;box.appendChild(d)});
+    $('dynamicArea').appendChild(box);
+  }
+  if(q.profile){
+    const box=document.createElement('div');box.className='profile';box.innerHTML='<div class="profiletop">Student profile</div><div class="profilegrid"></div>';
+    const grid=box.querySelector('.profilegrid');Object.entries(q.profile).forEach(([k,v])=>{const d=document.createElement('div');d.className='profileitem';d.innerHTML=`<span>${escapeHtml(k)}</span><b>${escapeHtml(v)}</b>`;grid.appendChild(d)});
+    $('dynamicArea').appendChild(box);
+  }
+  if(q.image){
+    const box=document.createElement('div');box.className='photo';
+    const img=document.createElement('img');img.alt='Photo for the question';img.referrerPolicy='no-referrer';
+    const err=document.createElement('div');err.className='photoerror hidden';err.textContent='The photo could not load. Check the internet connection and ask your teacher before continuing.';
+    img.onerror=()=>{img.classList.add('hidden');err.classList.remove('hidden')};img.src=q.image;box.append(img,err);$('dynamicArea').appendChild(box);
+  }
+  if(q.sentence){const d=document.createElement('div');d.className='sentence';d.textContent=q.sentence;$('dynamicArea').appendChild(d);}
+
+  if(q.type==='mcq') renderMCQ(q); else renderMatching(q);
+  showAnswerFeedback(q);
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function renderMCQ(q){
+  const opts=state.optionOrders[q.id];
+  const saved=state.answers[q.id];
+  const checked=!!state.checked[q.id];
+  opts.forEach((text,i)=>{
+    const isChosen=saved===text;
+    const penalized=!!(state.securityPenalties&&state.securityPenalties[q.id]);
+    const chosenClass=isChosen?(checked?((!penalized&&saved===q.answer)?' correct':' incorrect'):' selected'):'';
+    const b=document.createElement('button');b.className='option'+chosenClass;b.type='button';b.disabled=checked;
+    b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span>${escapeHtml(text)}</span>`;
+    b.onclick=()=>{
+      if(state.status!=='active'||state.checked[q.id])return;
+      state.answers[q.id]=text;
+      state.checked[q.id]=true;
+      saveState();
+      renderQuestion();
+    };
+    $('options').appendChild(b);
+  });
+  $('nextBtn').disabled=!checked;
+  if(checked && state.current===24)$('nextBtn').textContent='Submit Exam';
+}
+// Rebuild the idiom block from scratch on every selection to prevent duplicate rows.
+function renderMatching(q){
+  const checked=!!state.checked[q.id];
+  $('options').classList.add('hidden');
+  const matchingArea=$('matchingArea');
+  matchingArea.innerHTML='';
+  matchingArea.classList.remove('hidden');
+
+  const hint=document.createElement('p');
+  hint.className='matchhint';
+  hint.textContent='Choose one meaning for each idiom. When you use a meaning, it becomes unavailable in the other lists.';
+
+  const list=document.createElement('div');
+  list.className='idiomlist';
+  const idioms=q.pairs.map(p=>p[0]);
+  const meanings=state.matchingMeanings;
+
+  idioms.forEach((idiom,index)=>{
+    const row=document.createElement('div');
+    row.className='idiomrow';
+
+    const label=document.createElement('div');
+    label.className='idiomlabel';
+    label.textContent=`${index+1}. ${idiom}`;
+
+    const select=document.createElement('select');
+    select.className='meaningselect';
+    select.setAttribute('aria-label',`Meaning for ${idiom}`);
+    select.disabled=checked;
+
+    const placeholder=document.createElement('option');
+    placeholder.value='';
+    placeholder.textContent='Choose meaning…';
+    placeholder.disabled=true;
+    placeholder.selected=!state.matching[idiom];
+    select.appendChild(placeholder);
+
+    meanings.forEach(meaning=>{
+      const option=document.createElement('option');
+      option.value=meaning;
+      option.textContent=meaning;
+      const owner=Object.keys(state.matching).find(k=>k!==idiom && state.matching[k]===meaning);
+      if(owner) option.disabled=true;
+      if(state.matching[idiom]===meaning) option.selected=true;
+      select.appendChild(option);
+    });
+
+    if(state.matching[idiom]) select.classList.add('chosen');
+    select.onchange=()=>{
+      if(checked)return;
+      const value=select.value;
+      if(!value)return;
+      state.matching[idiom]=value;
+      saveState();
+      renderMatching(q);
+    };
+
+    row.append(label,select);
+    list.appendChild(row);
+  });
+
+  const completed=idioms.filter(idiom=>state.matching[idiom]).length;
+  const foot=document.createElement('div');
+  foot.className='matchfooter';
+  foot.textContent=`${completed} of ${q.pairs.length} meanings selected`;
+
+  const tip=document.createElement('div');
+  tip.className='matchtip';
+  tip.textContent=checked
+    ? 'Your idiom answers are locked.'
+    : 'You may change a selection before pressing Check Answer. A changed meaning becomes available again.';
+
+  matchingArea.append(hint,list,foot,tip);
+  if(checked){
+    $('nextBtn').disabled=false;
+    $('nextBtn').textContent=state.current===24?'Submit Exam':'Continue';
+  }else{
+    $('nextBtn').disabled=completed!==q.pairs.length;
+    $('nextBtn').textContent='Check Answer';
+  }
+}
+
+function submitCurrent(){
+  if(state.status!=='active')return;
+  const q=byId(state.order[state.current]);
+  if(q.type==='mcq'){
+    if(!state.answers[q.id]||!state.checked[q.id])return;
+  }else{
+    if(Object.keys(state.matching).length!==q.pairs.length)return;
+    if(!state.checked[q.id]){
+      state.checked[q.id]=true;
+      saveState();
+      renderQuestion();
+      return;
+    }
+  }
+  state.current++;
+  if(state.current>=25){finishExam('complete');return;}
+  saveState();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+}
+function calculateScore(){
+  let score=0;
+  QUESTIONS.forEach(q=>{
+    if(state.securityPenalties&&state.securityPenalties[q.id]) return;
+    if(q.type==='mcq'){if(state.answers[q.id]===q.answer)score+=1;}
+    else{
+      let correct=0;q.pairs.forEach(([idiom,meaning])=>{if(state.matching[idiom]===meaning)correct++});
+      if(correct>=Math.ceil(q.pairs.length*2/3))score+=1;
+    }
+  });
+  return score;
+}
+function finishExam(reason){
+  if(!state||state.status==='finished')return;
+  state.status='finished';state.finishedAt=Date.now();state.score=calculateScore();state.finishReason=reason;state.pendingHiddenAt=null;saveState();clearInterval(tickHandle);showDone();
+}
+function showDone(){
+  showOnly('doneView');$('statusDot').textContent='Submitted';
+  const score=Number(state.score||0),pct=Math.round(score/25*100),grade=(score/25*5).toFixed(1);
+  $('doneStudent').textContent=`${state.name}, your evaluation has been submitted.`;
+  $('doneScore').textContent=`${score} / 25`;$('donePct').textContent=pct+'%';$('doneGrade').textContent=grade+' / 5.0';
+}
+function lockExam(reason){
+  if(!state||state.status!=='active')return;
+  const q=byId(state.order[state.current]);
+  state.securityPenalties=state.securityPenalties||{};
+  if(q){
+    state.securityPenalties[q.id]=true;
+    state.checked[q.id]=true;
+  }
+  state.status='locked';state.lockReason=reason;state.lockedAt=Date.now();state.pendingHiddenAt=null;saveState();clearInterval(tickHandle);showLocked();
+}
+function showLocked(){showOnly('lockedView');$('statusDot').textContent='Locked';$('teacherPass').value='';}
+function unlockExam(){
+  if($('teacherPass').value!==TEACHER_CODE){showToast('Incorrect teacher password.');$('teacherPass').value='';return;}
+  if(remaining()<=0){state.status='active';saveState();finishExam('time');return;}
+  state.status='active';state.lockReason=null;state.lockedAt=null;state.pendingHiddenAt=null;saveState();showExam();
+}
+
+// Security: refresh preserves the attempt. Leaving the exam by tab/app/background locks it.
+// Layer 1: Page Visibility catches normal tab switches and apps sent to the background.
+document.addEventListener('visibilitychange',()=>{
+  if(!state||state.status!=='active')return;
+  if(document.hidden){
+    state.pendingHiddenAt=Date.now();saveState();
+    clearTimeout(hideTimer);
+    hideTimer=setTimeout(()=>{if(document.hidden&&state&&state.status==='active')lockExam('background');},650);
+  }else{
+    clearTimeout(hideTimer);
+    if(state.pendingHiddenAt){lockExam('background');}
+  }
+});
+
+// Layer 2: focus-loss catches many split-screen, floating-window and overlay cases
+// where the browser can remain technically visible while another app receives focus.
+document.addEventListener('pointerdown',e=>{
+  if(e.target && e.target.tagName==='SELECT') selectGraceUntil=Date.now()+1200;
+},true);
+document.addEventListener('touchstart',e=>{
+  if(e.target && e.target.tagName==='SELECT') selectGraceUntil=Date.now()+1200;
+},{capture:true,passive:true});
+window.addEventListener('blur',()=>{
+  if(!state||state.status!=='active'||unloading)return;
+  clearTimeout(focusLossTimer);
+  focusLossTimer=setTimeout(()=>{
+    if(!state||state.status!=='active'||unloading)return;
+    if(document.hidden){lockExam('background');return;}
+    const active=document.activeElement;
+    const legitimateSelect=active && active.tagName==='SELECT' && Date.now()<=selectGraceUntil;
+    if(legitimateSelect)return;
+    if(typeof document.hasFocus==='function' && !document.hasFocus()) lockExam('focus-loss');
+  },450);
+});
+window.addEventListener('focus',()=>{clearTimeout(focusLossTimer);});
+
+// A normal refresh is allowed and must restore the same attempt instead of locking it.
+window.addEventListener('beforeunload',()=>{unloading=true;clearTimeout(focusLossTimer);});
+window.addEventListener('pageshow',()=>{unloading=false;clearTimeout(focusLossTimer);});
+
+['copy','cut','paste','contextmenu','selectstart','dragstart'].forEach(evt=>document.addEventListener(evt,e=>{if(state&&state.status==='active')e.preventDefault();}));
+document.addEventListener('keydown',e=>{
+  if(!state||state.status!=='active')return;
+  const k=e.key.toLowerCase();if((e.ctrlKey||e.metaKey)&&['c','v','x','a','u','s','p'].includes(k))e.preventDefault();if(e.key==='F12')e.preventDefault();
+});
+history.pushState(null,'',location.href);window.addEventListener('popstate',()=>{if(state&&state.status==='active'){history.pushState(null,'',location.href);showToast('Back navigation is disabled during the exam.');}});
+
+$('startBtn').addEventListener('click',startExam);
+$('studentName').addEventListener('keydown',e=>{if(e.key==='Enter')startExam();});
+$('nextBtn').addEventListener('click',submitCurrent);
+$('unlockBtn').addEventListener('click',unlockExam);
+$('teacherPass').addEventListener('keydown',e=>{if(e.key==='Enter')unlockExam();});
+
+boot();
+})();
+</script>
+</body>
+</html>
